@@ -15,9 +15,14 @@ const Dashboard = () => {
               </h1>
               <p className="page-subtitle">Behavior Tracking Dashboard</p>
             </div>
-            <button onClick={logout} className="btn btn-secondary">
-              Logout
-            </button>
+            <div style={{ display: 'flex', gap: 'var(--spacing-sm)' }}>
+              <Link to="/settings" className="btn btn-secondary">
+                ⚙️ Settings
+              </Link>
+              <button onClick={logout} className="btn btn-secondary">
+                Logout
+              </button>
+            </div>
           </div>
         </div>
 

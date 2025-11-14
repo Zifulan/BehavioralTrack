@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import { SessionProvider } from './context/SessionContext';
 import PrivateRoute from './components/PrivateRoute';
+import NotificationCenter from './components/NotificationCenter';
 
 // Pages
 import Login from './pages/Login';
@@ -11,6 +12,7 @@ import ClientList from './pages/ClientList';
 import ClientDetail from './pages/ClientDetail';
 import SessionView from './pages/SessionView';
 import Analytics from './pages/Analytics';
+import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 
 import './styles/App.css';
@@ -20,6 +22,7 @@ function App() {
     <AuthProvider>
       <SessionProvider>
         <Router>
+          <NotificationCenter />
           <Routes>
             {/* Public routes */}
             <Route path="/login" element={<Login />} />
@@ -32,6 +35,7 @@ function App() {
               <Route path="/clients/:id" element={<ClientDetail />} />
               <Route path="/sessions/:id" element={<SessionView />} />
               <Route path="/analytics" element={<Analytics />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
 
             {/* 404 */}

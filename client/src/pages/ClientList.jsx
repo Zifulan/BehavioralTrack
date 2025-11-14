@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from '../services/api';
+import AddClientDialog from '../components/AddClientDialog';
 
 const ClientList = () => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [showAddClient, setShowAddClient] = useState(false);
 
   useEffect(() => {
     fetchClients();
@@ -21,6 +22,10 @@ const ClientList = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleClientAdded = (newClient) => {
+    setClients(prev => [...prev, newClient]);
   };
 
   if (loading) {
@@ -46,7 +51,7 @@ const ClientList = () => {
               <Link to="/" className="btn btn-secondary">
                 Back to Dashboard
               </Link>
-              <button className="btn btn-primary" onClick={() => navigate('/clients/new')}>
+              <button className="btn btn-primary" onClick={() => setShowAddClient(true)}>
                 Add Client
               </button>
             </div>
@@ -63,7 +68,7 @@ const ClientList = () => {
             <p style={{ color: 'var(--gray-600)', marginBottom: 'var(--spacing-lg)' }}>
               Get started by adding your first client
             </p>
-            <button className="btn btn-primary" onClick={() => navigate('/clients/new')}>
+            <button className="btn btn-primary" onClick={() => setShowAddClient(true)}>
               Add Your First Client
             </button>
           </div>
@@ -100,6 +105,13 @@ const ClientList = () => {
           </div>
         )}
       </div>
+
+      {/* Add Client Dialog */}
+      <AddClientDialog
+        isOpen={showAddClient}
+        onClose={() => setShowAddClient(false)}
+        onClientAdded={handleClientAdded}
+      />
     </div>
   );
 };

@@ -1,0 +1,205 @@
+.duration-timer {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  transition: border-color var(--transition-base);
+}
+
+.duration-timer.running {
+  border-color: var(--success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.timer-header {
+  text-align: center;
+}
+
+.timer-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.timer-description {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin: 0;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) 0;
+}
+
+.timer-current {
+  text-align: center;
+}
+
+.timer-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-500);
+  margin-bottom: var(--spacing-xs);
+}
+
+.timer-time {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--transition-base);
+}
+
+.timer-time.active {
+  color: var(--success);
+  animation: pulse-text 2s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.timer-total {
+  text-align: center;
+  padding-top: var(--spacing-md);
+  border-top: 1px dashed var(--gray-300);
+}
+
+.timer-total-time {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.timer-button {
+  flex: 1;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-height: 80px;
+  box-shadow: var(--shadow-md);
+}
+
+.timer-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.timer-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.timer-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.timer-button-start {
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+  color: white;
+}
+
+.timer-button-stop {
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: white;
+}
+
+.timer-button-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.timer-button-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.timer-error {
+  background-color: var(--danger);
+  color: white;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.timer-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--success);
+}
+
+.timer-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--success);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .timer-time {
+    font-size: 2.5rem;
+  }
+
+  .timer-button {
+    min-height: 100px;
+  }
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .timer-button:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}

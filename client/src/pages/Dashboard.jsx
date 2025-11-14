@@ -43,17 +43,14 @@ const Dashboard = () => {
             </small>
           </div>
 
-          <div className="card" style={{ opacity: 0.6 }}>
+          <Link to="/analytics" className="card" style={{ textDecoration: 'none', color: 'inherit' }}>
             <h3 style={{ fontSize: '1.25rem', marginBottom: 'var(--spacing-sm)' }}>
-              Reports
+              Analytics & Trends
             </h3>
             <p style={{ color: 'var(--gray-600)' }}>
-              Generate and export behavior reports
+              View insights and behavior tracking statistics
             </p>
-            <small style={{ color: 'var(--gray-500)', display: 'block', marginTop: 'var(--spacing-sm)' }}>
-              Coming soon
-            </small>
-          </div>
+          </Link>
         </div>
 
         <div className="card" style={{ marginTop: 'var(--spacing-xl)' }}>

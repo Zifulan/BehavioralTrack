@@ -4,6 +4,7 @@ import api from '../services/api';
 import TallyCounter from '../components/TallyCounter';
 import DurationTimer from '../components/DurationTimer';
 import AddBehaviorDialog from '../components/AddBehaviorDialog';
+import BulkBehaviorDialog from '../components/BulkBehaviorDialog';
 import './SessionView.css';
 
 const SessionView = () => {
@@ -14,6 +15,7 @@ const SessionView = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showAddBehavior, setShowAddBehavior] = useState(false);
+  const [showBulkBehavior, setShowBulkBehavior] = useState(false);
   const [isEndingSession, setIsEndingSession] = useState(false);
 
   useEffect(() => {
@@ -41,6 +43,11 @@ const SessionView = () => {
 
   const handleBehaviorAdded = (newBehavior) => {
     setBehaviors(prev => [...prev, { ...newBehavior, totalCount: 0, totalDuration: 0 }]);
+  };
+
+  const handleBehaviorsAdded = (newBehaviors) => {
+    const behaviorsWithDefaults = newBehaviors.map(b => ({ ...b, totalCount: 0, totalDuration: 0 }));
+    setBehaviors(prev => [...prev, ...behaviorsWithDefaults]);
   };
 
   const handleEndSession = async () => {
@@ -149,12 +156,20 @@ const SessionView = () => {
             </button>
 
             {isSessionActive && (
-              <button
-                className="btn btn-primary"
-                onClick={() => setShowAddBehavior(true)}
-              >
-                + Add Behavior
-              </button>
+              <>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setShowAddBehavior(true)}
+                >
+                  + Add Behavior
+                </button>
+                <button
+                  className="btn btn-success"
+                  onClick={() => setShowBulkBehavior(true)}
+                >
+                  + Add Multiple
+                </button>
+              </>
             )}
 
             <button
@@ -247,6 +262,14 @@ const SessionView = () => {
         onClose={() => setShowAddBehavior(false)}
         sessionId={session.id}
         onBehaviorAdded={handleBehaviorAdded}
+      />
+
+      {/* Bulk Behavior Dialog */}
+      <BulkBehaviorDialog
+        isOpen={showBulkBehavior}
+        onClose={() => setShowBulkBehavior(false)}
+        sessionId={session.id}
+        onBehaviorsAdded={handleBehaviorsAdded}
       />
     </div>
   );

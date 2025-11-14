@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import ClientList from './pages/ClientList';
 import ClientDetail from './pages/ClientDetail';
 import SessionView from './pages/SessionView';
+import Analytics from './pages/Analytics';
 import NotFound from './pages/NotFound';
 
 import './styles/App.css';
@@ -30,6 +31,7 @@ function App() {
               <Route path="/clients" element={<ClientList />} />
               <Route path="/clients/:id" element={<ClientDetail />} />
               <Route path="/sessions/:id" element={<SessionView />} />
+              <Route path="/analytics" element={<Analytics />} />
             </Route>
 
             {/* 404 */}
